@@ -1,0 +1,80 @@
+<div class="container-fluid">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                 <div class="form-group">
+                    <label for="search">Search</label>
+                     <input type="text" name="" id="search" placeholder="search" 
+                     class="form-control"
+                    (input)="getSearchTerm($event)"
+                     >
+                 </div>
+                 
+            </div>
+            <div class="col-md-12">
+                <div class="form-group">
+                     <div class="buttons">
+                         <button class="btn btn-primary"
+                         >Copy</button>
+                         <button class="btn btn-primary"
+                         (click)="exportAsCSV()"
+                         >CSV</button>
+                         <button class="btn btn-primary"
+                         (click)="exportToExcel()"
+                         >ExportToExcel</button>
+                         <button class="btn btn-primary" (click)="downLoadPDF()">SavePDF</button>
+                         <button class="btn btn-primary">Print</button>
+                     </div>
+                 </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="entry">Entries</label>
+                    <select name="" id="entry">
+                        <option value="value">value</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="table">
+                    <!--checktablelength-->
+
+                    <table class="table table-striped" #tableRef
+                    *ngIf="checkTableLength(customerData); else nodata"
+                    id="export-table" 
+                    >
+                          <thead>
+                            <tr>
+                              <th scope="col">ID</th>
+                              <th scope="col">FirstName</th>
+                              <th scope="col">LastName</th>
+                              <th scope="col">PhoneNumber</th>
+                              <th scope="col">Stage</th>
+                              <th scope="col">Product</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr *ngFor="let data of filteredCustomerData; let i = index;">
+                              <td>{{data.customerId}}</td>
+                              <td>{{data.firstName}}</td>
+                              <td>{{data.lastName}}</td>
+                              <td>{{data.phone}}</td>
+                              <td>{{data.stage}}</td>
+                              <td>{{data.product}}</td>
+                            </tr>
+                          </tbody>
+</table>
+<!--else part-->
+<ng-template #nodata>
+    <div class="container">
+        <h3 class="text-center">There are no customers yet</h3>
+    </div>
+    
+</ng-template>
+<!--else part-->
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</div>
